@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="memberService" class="hello.core.member.MemberServiceImpl" >
+        <!-- 생성자를 넣어준다. ref=레퍼런스 -->
+        <constructor-arg name="memberRepository" ref="memberRepository" />
+    </bean>
+
+    <bean id="memberRepository" class="hello.core.member.MemoryMemberRepository" />
+    <!-- AppConfig.class의 memberService, memberRepository 등록한 것과 유사하다.
+    // 전부 AppConfig의 파일과 유사하다.-->
+
+    <bean id="orderService" class="hello.core.order.OrderServiceImpl">
+        <constructor-arg name="memberRepository" ref="memberRepository" />
+        <constructor-arg name="discountPolicy" ref="discountPolicy" />
+    </bean>
+
+    <bean id="discountPolicy" class="hello.core.discount.RateDiscountPolicy" />
+
+</beans>
